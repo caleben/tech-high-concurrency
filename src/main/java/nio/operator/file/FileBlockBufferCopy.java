@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
-import static nio.NioDemoConfig.CAP;
+import static tool.NioConfig.CAP;
 
 /**
  * @author wuenci

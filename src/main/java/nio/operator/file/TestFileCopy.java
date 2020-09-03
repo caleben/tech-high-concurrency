@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import static nio.NioDemoConfig.FILE_RESOURCE_DEST_PATH;
-import static nio.NioDemoConfig.FILE_RESOURCE_SRC_PATH;
+import static tool.NioConfig.FILE_RESOURCE_DEST_PATH;
+import static tool.NioConfig.FILE_RESOURCE_SRC_PATH;
 
 /**
  * @author wuenci

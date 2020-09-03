@@ -5,7 +5,7 @@ import java.nio.channels.FileChannel;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
-import static nio.NioDemoConfig.CAP;
+import static tool.NioConfig.CAP;
 
 /**
  * @author wuenci
