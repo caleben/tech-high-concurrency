@@ -40,6 +40,6 @@ public class ConfigProperties {
 
     public int getAndComputeNumWithStart(String key) {
         String s = getValue(key);
-        return Arrays.stream(s.split("\\*")).map(Integer::parseInt).reduce((a, b) -> a * b).get();
+        return Arrays.stream(s.split("\\*")).map(Integer::parseInt).reduce((a, b) -> a * b).orElse(1024 * 10);
     }
 }
