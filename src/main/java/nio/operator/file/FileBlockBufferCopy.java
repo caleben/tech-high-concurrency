@@ -15,15 +15,14 @@ import static tool.NioConfig.CAP;
  * @date 2020/9/2
  * @since 2.0.0
  */
-public class FileBlockBufferCopy implements IFileCopy {
-    private String name;
+public class FileBlockBufferCopy extends IFileCopy {
 
     public FileBlockBufferCopy(String name) {
-        this.name = name;
+        super(name);
     }
 
     @Override
-    public void copy(String src, String dest) throws IOException {
+    public long copy(String src, String dest) throws IOException {
 
         Instant start = Instant.now();
         try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(src));
@@ -34,13 +33,9 @@ public class FileBlockBufferCopy implements IFileCopy {
                 bos.write(bytes, 0, len);
             }
             bos.flush();
-            System.out.println(getIdentifyName() + " 复制文件完成耗时：" + ChronoUnit.MILLIS.between(start, Instant.now()));
-        }
-    }
 
-    @Override
-    public String getIdentifyName() {
-        return name;
+            return ChronoUnit.MILLIS.between(start, Instant.now());
+        }
     }
 
 }

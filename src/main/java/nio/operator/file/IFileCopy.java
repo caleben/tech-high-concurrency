@@ -12,7 +12,13 @@ import java.nio.channels.FileChannel;
  * @date 2020/9/2
  * @since 2.0.0
  */
-public interface IFileCopy {
+public abstract class IFileCopy {
+
+    private String name;
+
+    public IFileCopy(String name) {
+        this.name = name;
+    }
 
     /**
      * 通过文件流获取FileChannel
@@ -21,7 +27,7 @@ public interface IFileCopy {
      * @return FileChannel
      * @throws FileNotFoundException 异常
      */
-    default FileChannel getChannel(String file, boolean in) throws FileNotFoundException {
+    FileChannel getChannel(String file, boolean in) throws FileNotFoundException {
 
         return in ? new FileInputStream(file).getChannel() :
                 new FileOutputStream(file).getChannel();
@@ -33,13 +39,13 @@ public interface IFileCopy {
      * @param dest dest file
      * @throws IOException exception
      */
-    default void doCopy(String src, String dest) throws IOException {
+    long doCopy(String src, String dest) throws IOException {
         String destFile = dest.replace("{type}", getIdentifyName());
         File d = new File(destFile);
         if (!d.exists()) {
             d.createNewFile();
         }
-        copy(src, destFile);
+        return copy(src, destFile);
     }
 
     /**
@@ -48,11 +54,15 @@ public interface IFileCopy {
      * @param dest destination file
      * @throws IOException 异常
      */
-    void copy(String src, String dest) throws IOException;
+    long copy(String src, String dest) throws IOException {
+        return 0;
+    }
 
     /**
      * retrieve identifyName
      * @return string
      */
-    String getIdentifyName();
+    String getIdentifyName() {
+        return name;
+    }
 }

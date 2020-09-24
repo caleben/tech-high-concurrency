@@ -21,7 +21,8 @@ public class TestFileCopy {
                 new FileNioFastCopy("nio-transfer"));
 
         for (IFileCopy fc : fileCopy) {
-            fc.doCopy(FILE_RESOURCE_SRC_PATH, FILE_RESOURCE_DEST_PATH);
+            long t = fc.doCopy(FILE_RESOURCE_SRC_PATH, FILE_RESOURCE_DEST_PATH);
+            System.out.println(fc.getIdentifyName() + " 复制文件完成耗时：" + t);
         }
 
     }

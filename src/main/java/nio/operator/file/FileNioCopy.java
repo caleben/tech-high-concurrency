@@ -13,15 +13,14 @@ import static tool.NioConfig.CAP;
  * @date 2020/9/2
  * @since 2.0.0
  */
-public class FileNioCopy implements IFileCopy {
-    private String name;
+public class FileNioCopy extends IFileCopy {
 
     public FileNioCopy(String name) {
-        this.name = name;
+        super(name);
     }
 
     @Override
-    public void copy(String src, String dest) throws IOException {
+    public long copy(String src, String dest) throws IOException {
 
         Instant start = Instant.now();
         try (FileChannel inChannel = getChannel(src, true);
@@ -39,12 +38,9 @@ public class FileNioCopy implements IFileCopy {
             }
             //循环写完后，刷新下outChannel中的数据
             outChannel.force(true);
-            System.out.println(getIdentifyName() + " 复制文件完成耗时：" + ChronoUnit.MILLIS.between(start, Instant.now()));
+
+            return ChronoUnit.MILLIS.between(start, Instant.now());
         }
     }
 
-    @Override
-    public String getIdentifyName() {
-        return name;
-    }
 }
