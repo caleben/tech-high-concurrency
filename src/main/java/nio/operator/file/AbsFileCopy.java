@@ -12,11 +12,11 @@ import java.nio.channels.FileChannel;
  * @date 2020/9/2
  * @since 2.0.0
  */
-public abstract class IFileCopy {
+public abstract class AbsFileCopy {
 
-    private String name;
+    private final String name;
 
-    public IFileCopy(String name) {
+    public AbsFileCopy(String name) {
         this.name = name;
     }
 

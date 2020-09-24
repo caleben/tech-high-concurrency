@@ -15,12 +15,12 @@ import static tool.NioConfig.FILE_RESOURCE_SRC_PATH;
 public class TestFileCopy {
     public static void main(String[] args) throws IOException {
 
-        List<IFileCopy> fileCopy = Arrays.asList(new FileBlockCopy("block-filestream"),
+        List<AbsFileCopy> fileCopy = Arrays.asList(new FileBlockCopy("block-filestream"),
                 new FileBlockBufferCopy("block-bufferedstream"),
                 new FileNioCopy("nio"),
                 new FileNioFastCopy("nio-transfer"));
 
-        for (IFileCopy fc : fileCopy) {
+        for (AbsFileCopy fc : fileCopy) {
             long t = fc.doCopy(FILE_RESOURCE_SRC_PATH, FILE_RESOURCE_DEST_PATH);
             System.out.println(fc.getIdentifyName() + " 复制文件完成耗时：" + t);
         }

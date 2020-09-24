@@ -13,7 +13,7 @@ import static tool.NioConfig.CAP;
  * @date 2020/9/2
  * @since 2.0.0
  */
-public class FileNioCopy extends IFileCopy {
+public class FileNioCopy extends AbsFileCopy {
 
     public FileNioCopy(String name) {
         super(name);
