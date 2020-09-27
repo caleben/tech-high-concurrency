@@ -8,6 +8,8 @@ import static tool.NioConfig.FILE_RESOURCE_DEST_PATH;
 import static tool.NioConfig.FILE_RESOURCE_SRC_PATH;
 
 /**
+ * 测试类，用于测试文件复制耗时
+ * 使用java执行命令：java -cp /{your_path}/nio/conf:/{your_path}/nio/lib/* nio.operator.file.TestFileCopy
  * @author wuenci
  * @date 2020/9/2
  * @since 2.0.0

@@ -1,11 +1,11 @@
 package nio.operator.file;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
@@ -23,16 +23,18 @@ public abstract class AbsFileCopy {
     }
 
     /**
-     * 通过文件流获取FileChannel
+     * 通过open方式获取FileChannel
      * @param file file
      * @param in 是否是输入
      * @return FileChannel
      * @throws FileNotFoundException 异常
      */
-    FileChannel getChannel(String file, boolean in) throws FileNotFoundException {
+    FileChannel getChannel(String file, boolean in) throws IOException {
+        return in ? FileChannel.open(Path.of(file), StandardOpenOption.READ) :
+                FileChannel.open(Path.of(file), StandardOpenOption.WRITE);
 
-        return in ? new FileInputStream(file).getChannel() :
-                new FileOutputStream(file).getChannel();
+//        return in ? new FileInputStream(file).getChannel() :
+//                new FileOutputStream(file).getChannel();
     }
 
     /**
