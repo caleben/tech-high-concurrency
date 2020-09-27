@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 
 /**
  * @author wuenci
@@ -39,24 +41,36 @@ public abstract class AbsFileCopy {
      * @param dest dest file
      * @throws IOException exception
      */
-    long doCopy(String src, String dest) throws IOException {
+    long copy(String src, String dest) throws IOException {
         String destFile = dest.replace("{type}", getIdentifyName());
         File d = new File(destFile);
         if (!d.exists()) {
             d.createNewFile();
         }
-        return copy(src, destFile);
+        return doCopy(src, destFile);
     }
+
+    /**
+     * 耗时封装
+     * @param copyCommand 具体业务
+     * @return 时间戳
+     * @throws IOException IO异常
+     */
+    long timeCost(CopyCommand copyCommand) throws IOException {
+        Instant start = Instant.now();
+        copyCommand.process();
+        return ChronoUnit.MILLIS.between(start, Instant.now());
+    }
+
 
     /**
      * copy file and return time mills
      * @param src src file
      * @param dest destination file
+     * @return long 时间戳
      * @throws IOException 异常
      */
-    long copy(String src, String dest) throws IOException {
-        return 0;
-    }
+    abstract long doCopy(String src, String dest) throws IOException;
 
     /**
      * retrieve identifyName
@@ -64,5 +78,13 @@ public abstract class AbsFileCopy {
      */
     String getIdentifyName() {
         return name;
+    }
+
+    interface CopyCommand {
+        /**
+         * 执行命令
+         * @throws IOException 异常
+         */
+        void process() throws IOException;
     }
 }
